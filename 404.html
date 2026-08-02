@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found</title>
+</head>
+<body>
+    <script>
+        function getBrowserLanguage() {
+            const lang = navigator.language || navigator.userLanguage || 'en-US';
+            const langCode = lang.split('-')[0].toLowerCase();
+            
+            // Список кириллических языков
+            const cyrillicLanguages = [
+                'ru', 'uk', 'be', 'bg', 'mk', 'sr', 
+                'kk', 'ky', 'mn', 'tg', 'ab', 'os', 
+                'cv', 'ce', 'ba', 'tt', 'sah'
+            ];
+            
+            // Список языков с латиницей (основные)
+            const latinLanguages = [
+                'en', 'es', 'fr', 'de', 'it', 'pt', 'nl', 
+                'sv', 'da', 'no', 'fi', 'pl', 'cs', 'sk', 
+                'hu', 'ro', 'hr', 'sl', 'et', 'lv', 'lt',
+                'vi', 'id', 'ms', 'fil', 'tl', 'sw', 'zu'
+            ];
+            
+            // Проверяем кириллицу
+            if (cyrillicLanguages.includes(langCode)) {
+                return 'ru';
+            } 
+            // Проверяем латиницу
+            else if (latinLanguages.includes(langCode)) {
+                return 'en';
+            } 
+            // Для всех остальных языков (включая азиатские, арабские и т.д.)
+            else {
+                // По умолчанию английский
+                return 'en';
+            }
+        }
+
+        function redirectToLanguagePage() {
+            const lang = getBrowserLanguage();
+            const currentPath = window.location.pathname;
+            
+            // Проверяем, не на странице ли уже нужного языка
+            if (currentPath.includes('/ru/') || currentPath.includes('/en/') ||
+                currentPath.endsWith('/ru.html') || currentPath.endsWith('/en.html')) {
+                return;
+            }
+            
+            const baseUrl = window.location.origin;
+            
+            if (lang === 'ru') {
+                window.location.replace(baseUrl + '/ru.html');
+            } else {
+                window.location.replace(baseUrl + '/en.html');
+            }
+        }
+
+        // Добавляем небольшую задержку для гарантии выполнения
+        setTimeout(redirectToLanguagePage, 0);
+    </script>
+</body>
+</html>
