@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-    
     <meta charset="UTF-8">
-    <!-- Optimized for all mobile devices and screens -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    
+    <!-- ====== JSON-LD FOR SITE NAME ====== -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "RGB-LCD Sandbox",
+        "alternateName": ["RGB.L.CD", "Subpixel Lab"],
+        "url": "https://rgb.l.cd/"
+    }
+    </script>
     
     <!-- Site title and description -->
     <title>RGB-LCD Sandbox — Professional Subpixel Laboratory</title>
@@ -14,41 +23,48 @@
     <meta name="author" content="RGB-LCD Sandbox">
     <meta name="robots" content="index, follow">
 
-    <!-- Icons (Favicon) for all platforms and devices -->
-    <link rel="icon" type="image/png" sizes="32x32" href="logo_rgb_l_cd.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="logo_rgb_l_cd.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="logo_rgb_l_cd.png">
-    <link rel="shortcut icon" href="logo_rgb_l_cd.png" type="image/png">
+    <!-- ====== FAVICON ====== -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo_rgb_l_cd.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/logo_rgb_l_cd.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo_rgb_l_cd.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo_rgb_l_cd.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo_rgb_l_cd.png">
 
-    <!-- PWA tags / Settings for mobile browsers -->
+    <!-- PWA / Mobile settings -->
     <meta name="theme-color" content="#08090d">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="RGB-LCD Sandbox">
 
-    <!-- Open Graph (For previews in Telegram, WhatsApp, VK, Facebook, etc.) -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://your-domain.com/">
+    <meta property="og:url" content="https://rgb.l.cd/en.html">
     <meta property="og:title" content="RGB-LCD Sandbox — Professional Subpixel Laboratory">
     <meta property="og:description" content="Interactive simulator of subpixel matrix structures LCD, OLED PenTile, CRT, and test signal generator.">
-    <meta property="og:image" content="logo_rgb_l_cd.png">
+    <meta property="og:image" content="https://rgb.l.cd/logo_rgb_l_cd.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:locale" content="en_US">
     <meta property="og:site_name" content="RGB-LCD Sandbox">
 
-    <!-- Twitter Cards (For X / Twitter) -->
+    <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://your-domain.com/">
+    <meta name="twitter:url" content="https://rgb.l.cd/en.html">
     <meta name="twitter:title" content="RGB-LCD Sandbox — Professional Subpixel Laboratory">
     <meta name="twitter:description" content="Interactive simulator of subpixel matrix structures LCD, OLED PenTile, CRT, and test signal generator.">
-    <meta name="twitter:image" content="logo_rgb_l_cd.png">
+    <meta name="twitter:image" content="https://rgb.l.cd/logo_rgb_l_cd.png">
+
+    <!-- Language alternates -->
+    <link rel="canonical" href="https://rgb.l.cd/en.html">
+    <link rel="alternate" hreflang="en" href="https://rgb.l.cd/en.html">
+    <link rel="alternate" hreflang="ru" href="https://rgb.l.cd/ru.html">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
     <style>
         :root {
             --bg-primary: #08090d;
