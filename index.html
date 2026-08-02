@@ -1,72 +1,14 @@
 <!DOCTYPE html>
 <html lang="ru" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    
-    <!-- ====== JSON-LD ДЛЯ SITE NAME ====== -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "RGB-LCD Sandbox",
-        "alternateName": ["RGB.L.CD", "Subpixel Lab"],
-        "url": "https://rgb.l.cd/"
-    }
-    </script>
-    
-    <!-- Название и описание сайта -->
-    <title>RGB-LCD Sandbox — Профессиональная субпиксельная лаборатория</title>
-    <meta name="title" content="RGB-LCD Sandbox — Профессиональная субпиксельная лаборатория">
-    <meta name="description" content="Интерактивный онлайн-симулятор и песочница субпиксельных структур матриц: LCD IPS, OLED PenTile, CRT, STN, CRT ЭЛТ и VFD. Тестирование сигналов, генерирование паттернов и анализатор пикселей.">
-    <meta name="keywords" content="RGB, LCD, OLED, PenTile, Subpixel, Sandbox, Песочница, Матрица, Дисплей, Симулятор экрана, CRT, IPS, Ретро">
-    <meta name="author" content="RGB-LCD Sandbox">
-    <meta name="robots" content="index, follow">
-
-    <!-- ====== FAVICON (ОБНОВЛЕННЫЙ БЛОК) ====== -->
-    <!-- Основной favicon.ico -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    
-    <!-- PNG версии для разных устройств -->
-    <link rel="icon" type="image/png" sizes="192x192" href="/logo_rgb_l_cd.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/logo_rgb_l_cd.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/logo_rgb_l_cd.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/logo_rgb_l_cd.png">
-    
-    <!-- Apple Touch Icon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/logo_rgb_l_cd.png">
-    <!-- ====== КОНЕЦ БЛОКА FAVICON ====== -->
-
-    <!-- PWA / Настройки для мобильных браузеров -->
-    <meta name="theme-color" content="#08090d">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="RGB-LCD Sandbox">
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://rgb.l.cd">
-    <meta property="og:title" content="RGB-LCD Sandbox — Профессиональная субпиксельная лаборатория">
-    <meta property="og:description" content="Интерактивный симулятор субпиксельных структур матриц LCD, OLED PenTile, CRT и генератор тестовых сигналов.">
-    <meta property="og:image" content="https://rgb.l.cd/logo_rgb_l_cd.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:locale" content="ru_RU">
-    <meta property="og:site_name" content="RGB-LCD Sandbox">
-
-    <!-- Twitter Cards -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://rgb.l.cd/">
-    <meta name="twitter:title" content="RGB-LCD Sandbox — Профессиональная субпиксельная лаборатория">
-    <meta name="twitter:description" content="Интерактивный симулятор субпиксельных структур матриц LCD, OLED PenTile, CRT и генератор тестовых сигналов.">
-    <meta name="twitter:image" content="https://rgb.l.cd/logo_rgb_l_cd.png">
-
-    <!-- Шрифты -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <title>RGB.L.CD — Субпиксельная лаборатория</title>
+    <meta name="description" content="Интерактивная лаборатория субпиксельных матриц. Симулятор LCD, OLED, CRT и генератор тестовых сигналов." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <style>
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         :root {
             --bg-primary: #08090d;
