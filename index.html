@@ -539,9 +539,8 @@
                 f4.textContent = t.f4;
                 privacyLink.textContent = t.privacy;
 
-                const page = lang === 'ru' ? 'ru.html' : 'en.html';
-                enterBtn.href = page;
-
+                const page = lang === 'ru' ? '/ru' : '/en';
+                
                 langBtns.forEach(btn => {
                     btn.classList.toggle('active', btn.dataset.lang === lang);
                 });
