@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+    
+    <!-- Главная страница -->
+    <url>
+        <loc>https://rgb.l.cd/</loc>
+        <lastmod>2026-08-02</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+        
+        <!-- Альтернативные версии для разных языков -->
+        <xhtml:link rel="alternate" hreflang="ru" href="https://rgb.l.cd/ru.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://rgb.l.cd/en.html"/>
+        
+        <!-- Изображения на странице -->
+        <image:image>
+            <image:loc>https://rgb.l.cd/logo_rgb_l_cd.png</image:loc>
+            <image:title>RGB-LCD Sandbox Logo</image:title>
+            <image:caption>Логотип RGB-LCD Sandbox</image:caption>
+        </image:image>
+    </url>
+    
+    <!-- Страница ru.html (если есть) -->
+    <url>
+        <loc>https://rgb.l.cd/ru.html</loc>
+        <lastmod>2026-08-02</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://rgb.l.cd/ru.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://rgb.l.cd/en.html"/>
+    </url>
+    
+    <!-- Страница en.html (если есть) -->
+    <url>
+        <loc>https://rgb.l.cd/en.html</loc>
+        <lastmod>2026-08-02</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://rgb.l.cd/en.html"/>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://rgb.l.cd/ru.html"/>
+    </url>
+
+    <!-- Страница 404 (можно включить, но не обязательно) -->
+    <url>
+        <loc>https://rgb.l.cd/404.html</loc>
+        <lastmod>2026-08-02</lastmod>
+        <changefreq>never</changefreq>
+        <priority>0.0</priority>
+    </url>
+    
+</urlset>
