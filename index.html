@@ -333,7 +333,9 @@
             </div>
         </div>
 
-        <a href="#" id="enterBtn" class="btn-primary">
+        <!-- Замените эту строку -->
+<a href="/ru" id="enterBtn" class="btn-primary">
+    
             <svg class="icon" viewBox="0 0 24 24"><path d="M13 5l7 7-7 7M5 12h14"/></svg>
             <span id="enterLabel">Открыть лабораторию</span>
         </a>
@@ -525,19 +527,33 @@
 
             let currentLang = detectLanguage();
 
+            
             function setLanguage(lang) {
-                if (lang !== 'ru' && lang !== 'en') return;
-                currentLang = lang;
-                localStorage.setItem('rgblcd_lang', lang);
+    if (lang !== 'ru' && lang !== 'en') return;
+    currentLang = lang;
+    localStorage.setItem('rgblcd_lang', lang);
 
-                const t = translations[lang];
-                enterLabel.textContent = t.enter;
-                tagline.textContent = t.tagline;
-                f1.textContent = t.f1;
-                f2.textContent = t.f2;
-                f3.textContent = t.f3;
-                f4.textContent = t.f4;
-                privacyLink.textContent = t.privacy;
+    const t = translations[lang];
+    enterLabel.textContent = t.enter;
+    tagline.textContent = t.tagline;
+    f1.textContent = t.f1;
+    f2.textContent = t.f2;
+    f3.textContent = t.f3;
+    f4.textContent = t.f4;
+    privacyLink.textContent = t.privacy;
+
+    // Указываем чистый путь относительно корня сайта
+    const page = lang === 'ru' ? '/ru' : '/en';
+    enterBtn.setAttribute('href', page); // Используем setAttribute для надежности
+
+    langBtns.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+
+    enterBtn.style.transform = 'scale(0.96)';
+    setTimeout(() => enterBtn.style.transform = '', 150);
+            }
+            
 
                 const page = lang === 'ru' ? '/ru' : '/en';
                 
