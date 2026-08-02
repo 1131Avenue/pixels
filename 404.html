@@ -1,67 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Page Not Found</title>
+    <title>Redirecting...</title>
+    <style>
+        /* Скрываем контент на время перенаправления, чтобы не было "мигания" */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0f172a; /* Можно заменить на фон вашего сайта */
+            color: #ffffff;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
 </head>
 <body>
     <script>
-        function getBrowserLanguage() {
-            const lang = navigator.language || navigator.userLanguage || 'en-US';
-            const langCode = lang.split('-')[0].toLowerCase();
-            
-            // Список кириллических языков
+        (function() {
+            // Список языков с кириллицей
             const cyrillicLanguages = [
                 'ru', 'uk', 'be', 'bg', 'mk', 'sr', 
                 'kk', 'ky', 'mn', 'tg', 'ab', 'os', 
                 'cv', 'ce', 'ba', 'tt', 'sah'
             ];
-            
-            // Список языков с латиницей (основные)
-            const latinLanguages = [
-                'en', 'es', 'fr', 'de', 'it', 'pt', 'nl', 
-                'sv', 'da', 'no', 'fi', 'pl', 'cs', 'sk', 
-                'hu', 'ro', 'hr', 'sl', 'et', 'lv', 'lt',
-                'vi', 'id', 'ms', 'fil', 'tl', 'sw', 'zu'
-            ];
-            
-            // Проверяем кириллицу
-            if (cyrillicLanguages.includes(langCode)) {
-                return 'ru';
-            } 
-            // Проверяем латиницу
-            else if (latinLanguages.includes(langCode)) {
-                return 'en';
-            } 
-            // Для всех остальных языков (включая азиатские, арабские и т.д.)
-            else {
-                // По умолчанию английский
-                return 'en';
-            }
-        }
 
-        function redirectToLanguagePage() {
-            const lang = getBrowserLanguage();
-            const currentPath = window.location.pathname;
-            
-            // Проверяем, не на странице ли уже нужного языка
-            if (currentPath.includes('/ru/') || currentPath.includes('/en/') ||
-                currentPath.endsWith('/ru.html') || currentPath.endsWith('/en.html')) {
+            function getLanguage() {
+                const lang = navigator.language || navigator.userLanguage || 'en';
+                const langCode = lang.split('-')[0].toLowerCase();
+                return cyrillicLanguages.includes(langCode) ? 'ru' : 'en';
+            }
+
+            const lang = getLanguage();
+            const path = window.location.pathname;
+
+            // Если пользователь УЖЕ на одной из страниц /ru или /en (или их подразделах) — не перенаправляем
+            if (path.startsWith('/ru') || path.startsWith('/en')) {
                 return;
             }
-            
-            const baseUrl = window.location.origin;
-            
-            if (lang === 'ru') {
-                window.location.replace(baseUrl + '/ru.html');
-            } else {
-                window.location.replace(baseUrl + '/en.html');
-            }
-        }
 
-        // Добавляем небольшую задержку для гарантии выполнения
-        setTimeout(redirectToLanguagePage, 0);
+            // Исходный хост (сохраняет www.rgb.l.cd или ваш пользовательский домен GitHub)
+            const origin = window.location.origin;
+
+            // Формируем чистый адрес без .html
+            const targetUrl = `${origin}/${lang}`;
+
+            // Выполняем перенаправление с заменой в истории браузера
+            window.location.replace(targetUrl);
+        })();
     </script>
 </body>
 </html>
