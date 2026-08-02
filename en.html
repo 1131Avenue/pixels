@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    
+    <meta charset="UTF-8">
+    <!-- Optimized for all mobile devices and screens -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    
+    <!-- Site title and description -->
+    <title>RGB-LCD Sandbox — Professional Subpixel Laboratory</title>
+    <meta name="title" content="RGB-LCD Sandbox — Professional Subpixel Laboratory">
+    <meta name="description" content="Interactive online simulator and sandbox of subpixel matrix structures: LCD IPS, OLED PenTile, CRT, STN, CRT, and VFD. Signal testing, pattern generation, and pixel analyzer.">
+    <meta name="keywords" content="RGB, LCD, OLED, PenTile, Subpixel, Sandbox, Matrix, Display, Screen Simulator, CRT, IPS, Retro">
+    <meta name="author" content="RGB-LCD Sandbox">
+    <meta name="robots" content="index, follow">
+
+    <!-- Icons (Favicon) for all platforms and devices -->
+    <link rel="icon" type="image/png" sizes="32x32" href="logo_rgb_l_cd.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo_rgb_l_cd.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="logo_rgb_l_cd.png">
+    <link rel="shortcut icon" href="logo_rgb_l_cd.png" type="image/png">
+
+    <!-- PWA tags / Settings for mobile browsers -->
+    <meta name="theme-color" content="#08090d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="RGB-LCD Sandbox">
+
+    <!-- Open Graph (For previews in Telegram, WhatsApp, VK, Facebook, etc.) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-domain.com/">
+    <meta property="og:title" content="RGB-LCD Sandbox — Professional Subpixel Laboratory">
+    <meta property="og:description" content="Interactive simulator of subpixel matrix structures LCD, OLED PenTile, CRT, and test signal generator.">
+    <meta property="og:image" content="logo_rgb_l_cd.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="RGB-LCD Sandbox">
+
+    <!-- Twitter Cards (For X / Twitter) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://your-domain.com/">
+    <meta name="twitter:title" content="RGB-LCD Sandbox — Professional Subpixel Laboratory">
+    <meta name="twitter:description" content="Interactive simulator of subpixel matrix structures LCD, OLED PenTile, CRT, and test signal generator.">
+    <meta name="twitter:image" content="logo_rgb_l_cd.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #08090d;
+            --bg-secondary: #0f121a;
+            --bg-tertiary: #171b28;
+            --border-color: #24293e;
+            --text-main: #f0f3f9;
+            --text-muted: #7c86a2;
+            --accent-red: #ff3366;
+            --accent-green: #00e676;
+            --accent-blue: #00b0ff;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --font-main: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f1f5f9;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #e2e8f0;
+            --border-color: #cbd5e1;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .icon {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Header & Mobile Navigation */
+        header {
+            background-color: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .brand-logo {
+            display: grid;
+            grid-template-columns: repeat(2, 6px);
+            gap: 2px;
+            background: #000;
+            padding: 4px;
+            border-radius: var(--radius-sm);
+        }
+
+        .brand-logo div { width: 6px; height: 6px; }
+
+        .logo-r { color: var(--accent-red); text-shadow: 0 0 8px rgba(255,51,102,0.5); }
+        .logo-g { color: var(--accent-green); text-shadow: 0 0 8px rgba(0,230,118,0.5); }
+        .logo-b { color: var(--accent-blue); text-shadow: 0 0 8px rgba(0,176,255,0.5); }
+
+        .nav-desktop {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .burger-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        /* Mobile Drawer Menu */
+        .mobile-drawer {
+            position: fixed;
+            top: 57px;
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transform: translateY(-150%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 999;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .mobile-drawer.open {
+            transform: translateY(0);
+        }
+
+        /* Buttons & Controls */
+        .btn {
+            background-color: var(--bg-tertiary);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .btn:hover {
+            border-color: var(--text-muted);
+            background-color: var(--border-color);
+        }
+
+        .btn-primary {
+            background-color: var(--accent-blue);
+            color: #000;
+            border: none;
+        }
+
+        /* Responsive Layout Grid */
+        .app-grid {
+            display: grid;
+            grid-template-columns: 360px 1fr;
+            flex: 1;
+            height: calc(100vh - 57px);
+        }
+
+        @media (max-width: 900px) {
+            .nav-desktop { display: none; }
+            .burger-btn { display: block; }
+            .app-grid {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+        }
+
+        /* Sidebar Tabs & Scroll Panel */
+        .sidebar {
+            background-color: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .sidebar-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-primary);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px 8px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab-btn.active {
+            color: var(--accent-blue);
+            border-bottom-color: var(--accent-blue);
+            background: var(--bg-secondary);
+        }
+
+        .sidebar-content {
+            padding: 16px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            flex: 1;
+        }
+
+        .tab-panel {
+            display: none;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .tab-panel.active { display: flex; }
+
+        .section-title {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .control-group label {
+            font-size: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .control-group input[type="range"] {
+            width: 100%;
+            accent-color: var(--accent-blue);
+        }
+
+        .select-input, .text-input, .file-input, .color-input {
+            width: 100%;
+            padding: 8px;
+            background: var(--bg-primary);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            outline: none;
+            font-size: 0.8rem;
+        }
+
+        .color-input { height: 38px; cursor: pointer; padding: 2px; }
+
+        /* Viewport & TV Frame */
+        .viewport {
+            background-color: var(--bg-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            overflow: auto;
+        }
+
+        .screens-wrapper {
+            display: flex;
+            gap: 16px;
+            width: 100%;
+            max-width: 1100px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .tv-frame {
+            background: #111;
+            padding: 10px;
+            border-radius: var(--radius-md);
+            border: 2px solid #252525;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            width: 100%;
+            flex: 1 1 450px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .screen-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            overflow: hidden;
+            border-radius: 2px;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            image-rendering: pixelated;
+        }
+
+        .info-panel {
+            position: absolute;
+            bottom: 6px;
+            left: 6px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 3px 6px;
+            border-radius: 2px;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: #fff;
+            pointer-events: none;
+        }
+
+        /* Footer & Legal Modals */
+        footer {
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 12px 20px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        footer a { color: var(--text-muted); text-decoration: underline; cursor: pointer; }
+        footer a:hover { color: var(--text-main); }
+
+        /* Official Bottom Cookie Banner Fix */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--bg-secondary);
+            border-top: 2px solid var(--accent-blue);
+            padding: 16px 20px;
+            box-shadow: 0 -5px 25px rgba(0,0,0,0.7);
+            z-index: 9999;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .cookie-banner.hidden { display: none; }
+
+        .cookie-text {
+            font-size: 0.8rem;
+            max-width: 800px;
+            line-height: 1.4;
+            color: var(--text-main);
+        }
+
+        /* Modal Windows */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.2s;
+            padding: 16px;
+        }
+
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+
+        .modal-body {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: var(--radius-md);
+            max-width: 650px; width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            display: flex; flex-direction: column; gap: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="brand">
+            <div class="brand-logo">
+                <div style="background: var(--accent-red)"></div>
+                <div style="background: var(--accent-green)"></div>
+                <div style="background: var(--accent-blue)"></div>
+                <div style="background: #fff"></div>
+            </div>
+            <span><span class="logo-r">R</span><span class="logo-g">G</span><span class="logo-b">B</span>.L.CD</span>
+        </div>
+
+        <div class="nav-desktop">
+            <button class="btn" onclick="sharePreset()">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8m-4-6l-4-4m0 0L8 6m4-4v12"/></svg>
+                Share
+            </button>
+            <button class="btn" onclick="openPreview()">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                Preview
+            </button>
+            <button class="btn" id="themeToggle">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                <span id="themeLabel">Light</span>
+            </button>
+        </div>
+
+        <button class="burger-btn" id="burgerToggle" aria-label="Menu">
+            <svg class="icon" style="width: 26px; height: 26px;" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+    </header>
+
+    <!-- Mobile Drawer Menu -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <button class="btn" onclick="sharePreset(); closeDrawer();">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8m-4-6l-4-4m0 0L8 6m4-4v12"/></svg>
+            Share Link
+        </button>
+        <button class="btn" onclick="openPreview(); closeDrawer();">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+            Open Preview
+        </button>
+        <button class="btn" id="themeToggleMobile">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3"/></svg>
+            Toggle Theme
+        </button>
+    </div>
+
+    <!-- Main Workspace -->
+    <div class="app-grid">
+        <aside class="sidebar">
+            <div class="sidebar-tabs">
+                <button class="tab-btn active" data-tab="tab-main">Main</button>
+                <button class="tab-btn" data-tab="tab-media">Text & Signal</button>
+                <button class="tab-btn" data-tab="tab-advanced">Advanced</button>
+            </div>
+
+            <div class="sidebar-content">
+                <!-- Tab 1: Main Settings -->
+                <div class="tab-panel active" id="tab-main">
+                    <div>
+                        <div class="section-title">Display Configuration</div>
+                        <select class="select-input" id="screenViewMode">
+                            <option value="single" selected>Single Display</option>
+                            <option value="dual">Dual Screen (Dual Comparison)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <div class="section-title">Screen Matrix #1</div>
+                        <select class="select-input" id="matrixType1">
+                            <option value="lcd-ips" selected>LCD IPS (Standard RGB Stripe)</option>
+                            <option value="lcd-tn">LCD TN+Film (Angle Shift)</option>
+                            <option value="lcd-va">LCD VA (Deep Black)</option>
+                            <option value="oled-pen">OLED Diamond PenTile</option>
+                            <option value="stn-monochrome">STN/DSTN (Old Laptops/LCD)</option>
+                            <option value="led-matrix">LED Panel</option>
+                            <option value="vfd">VFD (Vacuum Fluorescent)</option>
+                            <option value="crt-triad">CRT (Shadow Mask)</option>
+                            <option value="gameboy">Retro LCD (Game Boy Monochromatic)</option>
+                        </select>
+                    </div>
+
+                    <div id="matrix2Group" style="display: none;">
+                        <div class="section-title">Screen Matrix #2</div>
+                        <select class="select-input" id="matrixType2">
+                            <option value="oled-pen" selected>OLED Diamond PenTile</option>
+                            <option value="stn-monochrome">STN LCD Monochrome</option>
+                            <option value="crt-triad">CRT</option>
+                            <option value="lcd-ips">LCD IPS</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="section-title">Screen #1 Resolution (Pixels)</div>
+                        <select class="select-input" id="resSelect1">
+                            <option value="auto" selected>Auto (Container Size)</option>
+                            <option value="160x90">160x90 (Retro Low)</option>
+                            <option value="320x180">320x180 (Pixel Art)</option>
+                            <option value="640x360">640x360 (LCD Standard)</option>
+                            <option value="1280x720">1280x720 (HD)</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group" id="resGroup2" style="display: none;">
+                        <div class="section-title">Screen #2 Resolution</div>
+                        <select class="select-input" id="resSelect2">
+                            <option value="auto" selected>Auto (Container Size)</option>
+                            <option value="160x90">160x90</option>
+                            <option value="320x180">320x180</option>
+                            <option value="640x360">640x360</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Subpixel Zoom: <span id="val-zoom">12x</span></label>
+                        <input type="range" id="zoom" min="0.5" max="40" step="0.5" value="12">
+                    </div>
+
+                    <div class="control-group">
+                        <label>Backlight Brightness: <span id="val-brightness">100%</span></label>
+                        <input type="range" id="brightness" min="0" max="100" value="100">
+                    </div>
+
+                    <div class="control-group">
+                        <label>Inter-pixel Grid: <span id="val-gap">2px</span></label>
+                        <input type="range" id="gap" min="0" max="6" value="2">
+                    </div>
+                </div>
+
+                <!-- Tab 2: Text and Signals -->
+                <div class="tab-panel" id="tab-media">
+                    <div>
+                        <div class="section-title">Signal Source</div>
+                        <select class="select-input" id="renderMode">
+                            <option value="rgb" selected>Dynamic RGB Waves</option>
+                            <option value="plasma">Plasma (Classic Demo Plasma)</option>
+                            <option value="cyber-grid">Cyberpunk Grid (Cyber Neon Grid)</option>
+                            <option value="matrix-rain">Matrix Rain (Digital Rain)</option>
+                            <option value="spectrum">Audio Spectrum Equalizer</option>
+                            <option value="radial-ripple">Concentric Circles (Radial Wave)</option>
+                            <option value="text-bit">Text Pixel Player</option>
+                            <option value="media">Load File (Photo/Video)</option>
+                            <option value="test-grid">Test Grid (Calibration)</option>
+                            <option value="noise">Digital TV Noise</option>
+                        </select>
+                    </div>
+
+                    <!-- Pixel text player settings -->
+                    <div id="textPlayerControls" class="control-group" style="display: none;">
+                        <div class="section-title">Text Parameters</div>
+                        <input type="text" id="customText" class="text-input" value="RGB.L.CD LAB 2026">
+                        
+                        <label style="margin-top: 6px;">
+                            Scroll Animation:
+                            <input type="checkbox" id="textScrollToggle" checked style="accent-color: var(--accent-blue);">
+                        </label>
+
+                        <label>Font Size: <span id="val-textSize">24px</span></label>
+                        <input type="range" id="textSize" min="10" max="72" value="24">
+
+                        <label>Scroll Speed: <span id="val-textSpeed">3x</span></label>
+                        <input type="range" id="textSpeed" min="1" max="10" value="3">
+
+                        <label>Text Color:</label>
+                        <input type="color" id="textColor" class="color-input" value="#00e676">
+                    </div>
+
+                    <!-- Media Upload -->
+                    <div id="fileUploadGroup" class="control-group" style="display: none;">
+                        <div class="section-title">File for Screen #1</div>
+                        <input type="file" id="mediaUploader1" class="file-input" accept="image/*,video/*">
+
+                        <div id="fileUpload2Group" style="display: none; margin-top: 10px;">
+                            <div class="section-title">File for Screen #2</div>
+                            <input type="file" id="mediaUploader2" class="file-input" accept="image/*,video/*">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 3: Fine Tuning -->
+                <div class="tab-panel" id="tab-advanced">
+                    <div class="control-group">
+                        <label>Angle Distortion (TN Film): <span id="val-angle">0°</span></label>
+                        <input type="range" id="angle" min="-60" max="60" value="0">
+                    </div>
+
+                    <div class="control-group">
+                        <label>OLED Burn-in: <span id="val-burnin">0%</span></label>
+                        <input type="range" id="burnin" min="0" max="50" value="0">
+                    </div>
+
+                    <div class="control-group">
+                        <label>Image Contrast: <span id="val-contrast">100%</span></label>
+                        <input type="range" id="contrast" min="50" max="200" value="100">
+                    </div>
+                </div>
+
+                <div style="margin-top: auto;">
+                    <button class="btn btn-primary" id="btnPause" style="width: 100%;">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        Pause / Resume
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Viewport -->
+        <main class="viewport">
+            <div class="screens-wrapper">
+                <div class="tv-frame">
+                    <div class="screen-container">
+                        <canvas id="lcdCanvas1"></canvas>
+                        <div class="info-panel" id="info1">Display #1</div>
+                    </div>
+                </div>
+
+                <div class="tv-frame" id="tvFrame2" style="display: none;">
+                    <div class="screen-container">
+                        <canvas id="lcdCanvas2"></canvas>
+                        <div class="info-panel" id="info2">Display #2</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div>&copy; 2026 RGB.L.CD — Subpixel Matrix Emulator</div>
+        <div>
+            <a onclick="openPrivacyModal()">Privacy Policy</a>
+        </div>
+    </footer>
+
+    <!-- Strict Bottom Official Cookie Notice Banner -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="cookie-text">
+            <strong>Use of Cookies and Local Storage</strong><br>
+            Our website uses cookies and DOM LocalStorage to ensure the proper functioning of the web application, storing user display configuration settings and visual themes. By continuing to use the site, you agree to our <a onclick="openPrivacyModal()" style="color: var(--accent-blue);">Privacy Policy</a>.
+        </div>
+        <button class="btn btn-primary" onclick="acceptCookies()">Accept and Continue</button>
+    </div>
+
+    <!-- Preview Modal -->
+    <div class="modal-overlay" id="previewModal">
+        <div class="modal-body">
+            <h3>Matrix Preview</h3>
+            <div style="aspect-ratio: 16/9; background: #000; overflow: hidden; border: 1px solid var(--border-color);">
+                <canvas id="modalCanvas" style="width: 100%; height: 100%;"></canvas>
+            </div>
+            <button class="btn btn-primary" onclick="closeModal('previewModal')">Close</button>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div class="modal-overlay" id="privacyModal">
+        <div class="modal-body">
+            <h3>Privacy Policy</h3>
+            <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted);">
+                1. This service runs entirely on the client side (Client-Side HTML5 Canvas).<br>
+                2. Uploaded user images and video files are processed locally in your browser and are not transmitted to third-party servers.<br>
+                3. We use LocalStorage exclusively to store visual interface parameters and selected presets.<br>
+                4. All collected technical parameters remain within the current user session.
+            </p>
+            <button class="btn btn-primary" onclick="closeModal('privacyModal')">Got it</button>
+        </div>
+    </div>
+
+    <!-- Hidden Media Elements -->
+    <video id="v1" loop muted playsinline style="display:none;"></video>
+    <img id="i1" style="display:none;" />
+    <video id="v2" loop muted playsinline style="display:none;"></video>
+    <img id="i2" style="display:none;" />
+
+    <script>
+        // DOM Handles
+        const burgerToggle = document.getElementById('burgerToggle');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        const themeToggle = document.getElementById('themeToggle');
+        const themeToggleMobile = document.getElementById('themeToggleMobile');
+        const themeLabel = document.getElementById('themeLabel');
+
+        const canvas1 = document.getElementById('lcdCanvas1');
+        const ctx1 = canvas1.getContext('2d', { willReadFrequently: true });
+        const canvas2 = document.getElementById('lcdCanvas2');
+        const ctx2 = canvas2.getContext('2d', { willReadFrequently: true });
+
+        const screenViewMode = document.getElementById('screenViewMode');
+        const tvFrame2 = document.getElementById('tvFrame2');
+        const matrix2Group = document.getElementById('matrix2Group');
+        const resGroup2 = document.getElementById('resGroup2');
+
+        const renderModeSelect = document.getElementById('renderMode');
+        const textPlayerControls = document.getElementById('textPlayerControls');
+        const fileUploadGroup = document.getElementById('fileUploadGroup');
+        const fileUpload2Group = document.getElementById('fileUpload2Group');
+
+        const customTextInput = document.getElementById('customText');
+        const textScrollToggle = document.getElementById('textScrollToggle');
+        const textSizeInput = document.getElementById('textSize');
+        const textSpeedInput = document.getElementById('textSpeed');
+        const textColorInput = document.getElementById('textColor');
+
+        const zoomInput = document.getElementById('zoom');
+        const brightnessInput = document.getElementById('brightness');
+        const gapInput = document.getElementById('gap');
+        const angleInput = document.getElementById('angle');
+        const burninInput = document.getElementById('burnin');
+        const contrastInput = document.getElementById('contrast');
+
+        const valZoom = document.getElementById('val-zoom');
+        const valBrightness = document.getElementById('val-brightness');
+        const valGap = document.getElementById('val-gap');
+        const valAngle = document.getElementById('val-angle');
+        const valBurnin = document.getElementById('val-burnin');
+        const valContrast = document.getElementById('val-contrast');
+
+        let isRunning = true;
+        let textOffset = 0;
+        let globalTime = 0;
+
+        let mediaType1 = null, mediaType2 = null;
+
+        // Custom Bit-Text Offscreen Engine
+        const bitCanvas = document.createElement('canvas');
+        const bitCtx = bitCanvas.getContext('2d');
+
+        const sampleCanvas1 = document.createElement('canvas');
+        const sampleCtx1 = sampleCanvas1.getContext('2d', { willReadFrequently: true });
+        const sampleCanvas2 = document.createElement('canvas');
+        const sampleCtx2 = sampleCanvas2.getContext('2d', { willReadFrequently: true });
+
+        // Mobile Burger Menu Toggle
+        burgerToggle.addEventListener('click', () => {
+            mobileDrawer.classList.toggle('open');
+        });
+        function closeDrawer() { mobileDrawer.classList.remove('open'); }
+
+        // Tabs Toggle
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById(btn.dataset.tab).classList.add('active');
+            });
+        });
+
+        // Theme Toggle
+        function switchTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            themeLabel.textContent = next === 'dark' ? 'Light' : 'Dark';
+            localStorage.setItem('rgblcd_theme', next);
+        }
+        themeToggle.addEventListener('click', switchTheme);
+        themeToggleMobile.addEventListener('click', () => { switchTheme(); closeDrawer(); });
+
+        // Cookies
+        function acceptCookies() {
+            localStorage.setItem('rgblcd_cookie_accepted', 'true');
+            document.getElementById('cookieBanner').classList.add('hidden');
+        }
+        if (localStorage.getItem('rgblcd_cookie_accepted') === 'true') {
+            document.getElementById('cookieBanner').classList.add('hidden');
+        }
+
+        // Modals
+        function openPreview() {
+            document.getElementById('previewModal').classList.add('active');
+            const mCvs = document.getElementById('modalCanvas');
+            mCvs.width = 400; mCvs.height = 225;
+            drawScreen(mCvs, mCvs.getContext('2d'), sampleCanvas1, sampleCtx1, document.getElementById('matrixType1').value, 'resSelect1', mediaType1, document.getElementById('v1'), document.getElementById('i1'));
+        }
+        function openPrivacyModal() { document.getElementById('privacyModal').classList.add('active'); }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+        // Mode Switching
+        renderModeSelect.addEventListener('change', (e) => {
+            const v = e.target.value;
+            textPlayerControls.style.display = v === 'text-bit' ? 'flex' : 'none';
+            fileUploadGroup.style.display = v === 'media' ? 'flex' : 'none';
+        });
+
+        screenViewMode.addEventListener('change', (e) => {
+            const dual = e.target.value === 'dual';
+            tvFrame2.style.display = dual ? 'flex' : 'none';
+            matrix2Group.style.display = dual ? 'block' : 'none';
+            resGroup2.style.display = dual ? 'block' : 'none';
+            if (renderModeSelect.value === 'media') fileUpload2Group.style.display = dual ? 'block' : 'none';
+            resizeCanvases();
+        });
+
+        // Media Handlers
+        document.getElementById('mediaUploader1').addEventListener('change', (e) => loadMedia(e.target.files[0], 1));
+        document.getElementById('mediaUploader2').addEventListener('change', (e) => loadMedia(e.target.files[0], 2));
+
+        function loadMedia(file, id) {
+            if (!file) return;
+            const url = URL.createObjectURL(file);
+            const isVid = file.type.startsWith('video/');
+            if (id === 1) {
+                mediaType1 = isVid ? 'video' : 'image';
+                if (isVid) { document.getElementById('v1').src = url; document.getElementById('v1').play(); }
+                else { document.getElementById('i1').src = url; }
+            } else {
+                mediaType2 = isVid ? 'video' : 'image';
+                if (isVid) { document.getElementById('v2').src = url; document.getElementById('v2').play(); }
+                else { document.getElementById('i2').src = url; }
+            }
+        }
+
+        function resizeCanvases() {
+            canvas1.width = canvas1.parentElement.clientWidth;
+            canvas1.height = canvas1.parentElement.clientHeight;
+            canvas2.width = canvas2.parentElement.clientWidth;
+            canvas2.height = canvas2.parentElement.clientHeight;
+        }
+        window.addEventListener('resize', resizeCanvases);
+        resizeCanvases();
+
+        // Subpixel Engine Rendering
+        function drawScreen(cvs, ctx, sCanvas, sCtx, matrixType, resSelectId, mediaType, hVideo, hImg) {
+            const w = cvs.width;
+            const h = cvs.height;
+            const zoom = parseFloat(zoomInput.value);
+            const brightness = parseInt(brightnessInput.value) / 100;
+            const gap = parseInt(gapInput.value);
+            const contrast = parseInt(contrastInput.value) / 100;
+            const mode = renderModeSelect.value;
+            const resVal = document.getElementById(resSelectId).value;
+
+            let cols, rows;
+            if (resVal === 'auto') {
+                cols = Math.max(10, Math.ceil(w / (zoom * 3)));
+                rows = Math.max(10, Math.ceil(h / zoom));
+            } else {
+                const parts = resVal.split('x');
+                cols = parseInt(parts[0]);
+                rows = parseInt(parts[1]);
+            }
+
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, w, h);
+
+            // Text Generator Offscreen Rendering
+            if (mode === 'text-bit') {
+                bitCanvas.width = cols;
+                bitCanvas.height = rows;
+                bitCtx.fillStyle = '#000000';
+                bitCtx.fillRect(0, 0, cols, rows);
+                
+                const fontSize = parseInt(textSizeInput.value);
+                bitCtx.font = `bold ${fontSize}px sans-serif`;
+                bitCtx.fillStyle = textColorInput.value;
+
+                let xPos = 5;
+                if (textScrollToggle.checked) {
+                    xPos = cols - textOffset;
+                }
+                bitCtx.fillText(customTextInput.value, xPos, Math.floor(rows * 0.7));
+            }
+
+            // Sampling Data
+            sCanvas.width = cols; sCanvas.height = rows;
+            if (mode === 'media') {
+                if (mediaType === 'video' && hVideo.readyState >= 2) sCtx.drawImage(hVideo, 0, 0, cols, rows);
+                else if (mediaType === 'image' && hImg.complete) sCtx.drawImage(hImg, 0, 0, cols, rows);
+            } else if (mode === 'text-bit') {
+                sCtx.drawImage(bitCanvas, 0, 0, cols, rows);
+            }
+
+            let sampleData = null;
+            if (mode === 'media' || mode === 'text-bit') {
+                try { sampleData = sCtx.getImageData(0, 0, cols, rows).data; } catch(e){}
+            }
+
+            const cellW = w / cols;
+            const cellH = h / rows;
+
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    let rVal = 0, gVal = 0, bVal = 0;
+
+                    if (mode === 'rgb') {
+                        rVal = Math.floor((Math.sin(globalTime + c * 0.2) + 1) * 127);
+                        gVal = Math.floor((Math.sin(globalTime + r * 0.2 + 2) + 1) * 127);
+                        bVal = Math.floor((Math.cos(globalTime + (c+r) * 0.1) + 1) * 127);
+                    } else if (mode === 'plasma') {
+                        const v1 = Math.sin(c * 0.1 + globalTime);
+                        const v2 = Math.sin(0.1 * (r * Math.sin(globalTime / 2) + c * Math.cos(globalTime / 3)) + globalTime);
+                        const cx = c + 0.5 * Math.sin(globalTime / 5) * cols;
+                        const cy = r + 0.5 * Math.cos(globalTime / 3) * rows;
+                        const v3 = Math.sin(Math.sqrt(cx * cx + cy * cy + 1) * 0.1 + globalTime);
+                        const v = v1 + v2 + v3;
+                        rVal = Math.floor((Math.sin(v * Math.PI) + 1) * 127);
+                        gVal = Math.floor((Math.cos(v * Math.PI) + 1) * 127);
+                        bVal = Math.floor((Math.sin(v * Math.PI + (2 * Math.PI / 3)) + 1) * 127);
+                    } else if (mode === 'cyber-grid') {
+                        const gridX = (c + Math.floor(globalTime * 5)) % 8 === 0;
+                        const gridY = (r + Math.floor(globalTime * 5)) % 8 === 0;
+                        if (gridX || gridY) { rVal = 255; gVal = 0; bVal = 180; } 
+                        else { rVal = 10; gVal = 15; bVal = 30; }
+                    } else if (mode === 'matrix-rain') {
+                        const drop = (Math.floor(globalTime * 10 + c * 3) % rows);
+                        if (r === drop) { rVal = 255; gVal = 255; bVal = 255; } 
+                        else if ((r < drop && r > drop - 5) || (r > drop + rows - 5)) {
+                            rVal = 0; gVal = Math.floor(255 - Math.abs(drop - r) * 40); bVal = 50;
+                        } else { rVal = 0; gVal = 15; bVal = 0; }
+                    } else if (mode === 'spectrum') {
+                        const heightVal = Math.abs(Math.sin(globalTime * 2 + c * 0.15)) * rows;
+                        if (rows - r <= heightVal) {
+                            rVal = Math.floor((r / rows) * 255);
+                            gVal = Math.floor((1 - r / rows) * 255);
+                            bVal = 200;
+                        } else { rVal = 10; gVal = 10; bVal = 20; }
+                    } else if (mode === 'radial-ripple') {
+                        const dx = c - cols / 2;
+                        const dy = r - rows / 2;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        const ripple = Math.sin(dist * 0.4 - globalTime * 3);
+                        rVal = Math.floor((ripple + 1) * 127);
+                        gVal = Math.floor((Math.cos(dist * 0.2 - globalTime * 2) + 1) * 127);
+                        bVal = 255 - rVal;
+                    } else if (mode === 'test-grid') {
+                        rVal = (c % 3 === 0) ? 255 : 20;
+                        gVal = (r % 3 === 0) ? 255 : 20;
+                        bVal = ((c+r) % 2 === 0) ? 255 : 20;
+                    } else if (mode === 'noise') {
+                        const rnd = Math.random() * 255;
+                        rVal = rnd; gVal = rnd; bVal = rnd;
+                    } else if (sampleData) {
+                        const idx = (r * cols + c) * 4;
+                        rVal = sampleData[idx];
+                        gVal = sampleData[idx+1];
+                        bVal = sampleData[idx+2];
+                    }
+
+                    // Contrast & Brightness
+                    rVal = Math.floor(Math.min(255, Math.max(0, (rVal - 128) * contrast + 128)) * brightness);
+                    gVal = Math.floor(Math.min(255, Math.max(0, (gVal - 128) * contrast + 128)) * brightness);
+                    bVal = Math.floor(Math.min(255, Math.max(0, (bVal - 128) * contrast + 128)) * brightness);
+
+                    const x = c * cellW;
+                    const y = r * cellH;
+                    const subW = Math.max(0.5, (cellW / 3) - gap);
+                    const subH = Math.max(0.5, cellH - gap);
+
+                    // Matrix Rendering Profiles
+                    if (matrixType === 'gameboy') {
+                        const avg = (rVal + gVal + bVal) / 3;
+                        ctx.fillStyle = avg > 100 ? '#8bac0f' : '#0f380f';
+                        ctx.fillRect(x, y, cellW - gap, cellH - gap);
+                    } else if (matrixType === 'vfd') {
+                        ctx.fillStyle = `rgb(0, ${gVal}, ${Math.floor(gVal*0.8)})`;
+                        ctx.fillRect(x, y, cellW - gap, cellH - gap);
+                    } else if (matrixType === 'stn-monochrome') {
+                        const avg = (rVal + gVal + bVal) / 3;
+                        ctx.fillStyle = `rgb(${150 - avg*0.5}, ${160 - avg*0.4}, ${120 - avg*0.5})`;
+                        ctx.fillRect(x, y, cellW - gap, cellH - gap);
+                    } else if (matrixType === 'oled-pen') {
+                        ctx.fillStyle = `rgb(${rVal},0,0)`;
+                        ctx.fillRect(x, y, subW * 1.2, subH);
+                        ctx.fillStyle = `rgb(0,${gVal},0)`;
+                        ctx.fillRect(x + subW * 1.2, y, subW * 0.6, subH * 0.5);
+                        ctx.fillStyle = `rgb(0,0,${bVal})`;
+                        ctx.fillRect(x + subW * 1.2, y + subH * 0.5, subW * 0.8, subH * 0.5);
+                    } else {
+                        // Standard Stripe LCD
+                        ctx.fillStyle = `rgb(${rVal}, 0, 0)`;
+                        ctx.fillRect(x, y, subW, subH);
+                        ctx.fillStyle = `rgb(0, ${gVal}, 0)`;
+                        ctx.fillRect(x + cellW / 3, y, subW, subH);
+                        ctx.fillStyle = `rgb(0, 0, ${bVal})`;
+                        ctx.fillRect(x + (cellW / 3) * 2, y, subW, subH);
+                    }
+                }
+            }
+        }
+
+        function animLoop() {
+            if (isRunning) {
+                globalTime += 0.05;
+                textOffset += parseInt(textSpeedInput.value);
+                if (textOffset > 1200) textOffset = 0;
+
+                drawScreen(canvas1, ctx1, sampleCanvas1, sampleCtx1, document.getElementById('matrixType1').value, 'resSelect1', mediaType1, document.getElementById('v1'), document.getElementById('i1'));
+                if (screenViewMode.value === 'dual') {
+                    drawScreen(canvas2, ctx2, sampleCanvas2, sampleCtx2, document.getElementById('matrixType2').value, 'resSelect2', mediaType2, document.getElementById('v2'), document.getElementById('i2'));
+                }
+            }
+            requestAnimationFrame(animLoop);
+        }
+
+        // Live Label Updates & Controls Fixes
+        zoomInput.addEventListener('input', (e) => valZoom.textContent = e.target.value + 'x');
+        brightnessInput.addEventListener('input', (e) => valBrightness.textContent = e.target.value + '%');
+        gapInput.addEventListener('input', (e) => valGap.textContent = e.target.value + 'px');
+        textSizeInput.addEventListener('input', (e) => document.getElementById('val-textSize').textContent = e.target.value + 'px');
+        textSpeedInput.addEventListener('input', (e) => document.getElementById('val-textSpeed').textContent = e.target.value + 'x');
+        
+        // Fix for "Advanced" tab
+        angleInput.addEventListener('input', (e) => valAngle.textContent = e.target.value + '°');
+        burninInput.addEventListener('input', (e) => valBurnin.textContent = e.target.value + '%');
+        contrastInput.addEventListener('input', (e) => valContrast.textContent = e.target.value + '%');
+
+        // Fixed pause button with proper active state toggle
+        const pauseBtn = document.getElementById('btnPause');
+        pauseBtn.addEventListener('click', () => {
+            isRunning = !isRunning;
+            // Toggle button active state properly
+            if (isRunning) {
+                pauseBtn.classList.add('btn-primary');
+                pauseBtn.style.backgroundColor = ''; // Reset to CSS variable
+            } else {
+                pauseBtn.classList.remove('btn-primary');
+                pauseBtn.style.backgroundColor = ''; // Reset to default
+            }
+        });
+        // Ensure initial state matches (running = true => active)
+        pauseBtn.classList.add('btn-primary');
+
+        function sharePreset() {
+            const url = `${window.location.origin}${window.location.pathname}?m=${document.getElementById('matrixType1').value}&z=${zoomInput.value}`;
+            navigator.clipboard.writeText(url);
+            alert('Configuration link copied!');
+        }
+
+        // Run
+        requestAnimationFrame(animLoop);
+    </script>
+</body>
+</html>
